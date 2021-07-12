@@ -1,0 +1,1 @@
+enum EsewaEnvironment { live, test }
