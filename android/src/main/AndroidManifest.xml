@@ -1,9 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sannyrai.esewa.esewa_plugin">
 
-    <application
-        android:name="io.flutter.app.FlutterApplication"
-        android:theme="@style/Theme.AppCompat.DayNight">
+    <application android:theme="@style/Theme.AppCompat.DayNight">
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
