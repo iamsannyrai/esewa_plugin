@@ -16,6 +16,9 @@ Esewa plugin for flutter application.
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.platform = :ios, '8.0'
+  s.preserve_paths = 'EsewaSDK.framework'
+  s.xcconfig = { 'OTHER_LDFLAGS' => '-framework EsewaSDK' }
+  s.vendored_frameworks = 'EsewaSDK.framework'
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
