@@ -41,10 +41,10 @@ class Esewa {
         _merchantInfo = merchantInfo,
         _environment = environment;
 
-  Future<void> makePayment(
+  void makePayment(
       {@required Function(PaymentResponse) onSuccess,
       @required Function(String) onError,
-      @required Function(String) onCancelled}) async {
+      @required Function(String) onCancelled}) {
     try {
       Map<String, String> merchantInfo = {
         "clientId": _merchantInfo.clientId,

@@ -1,0 +1,22 @@
+PODS:
+  - esewa_plugin (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+
+DEPENDENCIES:
+  - esewa_plugin (from `.symlinks/plugins/esewa_plugin/ios`)
+  - Flutter (from `Flutter`)
+
+EXTERNAL SOURCES:
+  esewa_plugin:
+    :path: ".symlinks/plugins/esewa_plugin/ios"
+  Flutter:
+    :path: Flutter
+
+SPEC CHECKSUMS:
+  esewa_plugin: 3d7dd4029d4963204b7cb5f0a8e7f4f2b6fdc774
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.10.0
