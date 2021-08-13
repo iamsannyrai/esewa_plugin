@@ -1,8 +1,10 @@
 import 'dart:convert';
 
-PaymentResponse paymentResponseFromJson(String str) => PaymentResponse.fromJson(json.decode(str));
+PaymentResponse paymentResponseFromJson(String str) =>
+    PaymentResponse.fromJson(json.decode(str));
 
-String paymentResponseToJson(PaymentResponse data) => json.encode(data.toJson());
+String paymentResponseToJson(PaymentResponse data) =>
+    json.encode(data.toJson());
 
 class PaymentResponse {
   PaymentResponse({
@@ -25,27 +27,30 @@ class PaymentResponse {
   final Message message;
   final TransactionDetails transactionDetails;
 
-  factory PaymentResponse.fromJson(Map<String, dynamic> json) => PaymentResponse(
-    productId: json["productId"],
-    productName: json["productName"],
-    totalAmount: json["totalAmount"],
-    environment: json["environment"],
-    code: json["code"],
-    merchantName: json["merchantName"],
-    message: Message.fromJson(json["message"]),
-    transactionDetails: TransactionDetails.fromJson(json["transactionDetails"]),
-  );
+  factory PaymentResponse.fromJson(Map<String, dynamic> json) =>
+      PaymentResponse(
+        productId: json["productId"],
+        productName: json["productName"],
+        totalAmount: json["totalAmount"],
+        environment: json["environment"],
+        code: json["code"],
+        merchantName: json["merchantName"],
+        message: Message.fromJson(Map<String, dynamic>.from(json["message"])),
+        transactionDetails: TransactionDetails.fromJson(
+            Map<String, dynamic>.from(json["transactionDetails"])),
+      );
 
-  Map<String, dynamic> toJson() => {
-    "productId": productId,
-    "productName": productName,
-    "totalAmount": totalAmount,
-    "environment": environment,
-    "code": code,
-    "merchantName": merchantName,
-    "message": message.toJson(),
-    "transactionDetails": transactionDetails.toJson(),
-  };
+  Map<String, dynamic> toJson() =>
+      {
+        "productId": productId,
+        "productName": productName,
+        "totalAmount": totalAmount,
+        "environment": environment,
+        "code": code,
+        "merchantName": merchantName,
+        "message": message.toJson(),
+        "transactionDetails": transactionDetails.toJson(),
+      };
 }
 
 class Message {
@@ -57,15 +62,17 @@ class Message {
   final String technicalSuccessMessage;
   final String successMessage;
 
-  factory Message.fromJson(Map<String, dynamic> json) => Message(
-    technicalSuccessMessage: json["technicalSuccessMessage"],
-    successMessage: json["successMessage"],
-  );
+  factory Message.fromJson(Map<String, dynamic> json) =>
+      Message(
+        technicalSuccessMessage: json["technicalSuccessMessage"],
+        successMessage: json["successMessage"],
+      );
 
-  Map<String, dynamic> toJson() => {
-    "technicalSuccessMessage": technicalSuccessMessage,
-    "successMessage": successMessage,
-  };
+  Map<String, dynamic> toJson() =>
+      {
+        "technicalSuccessMessage": technicalSuccessMessage,
+        "successMessage": successMessage,
+      };
 }
 
 class TransactionDetails {
@@ -79,15 +86,17 @@ class TransactionDetails {
   final String referenceId;
   final String date;
 
-  factory TransactionDetails.fromJson(Map<String, dynamic> json) => TransactionDetails(
-    status: json["status"],
-    referenceId: json["referenceId"],
-    date: json["date"],
-  );
+  factory TransactionDetails.fromJson(Map<String, dynamic> json) =>
+      TransactionDetails(
+        status: json["status"],
+        referenceId: json["referenceId"],
+        date: json["date"],
+      );
 
-  Map<String, dynamic> toJson() => {
-    "status": status,
-    "referenceId": referenceId,
-    "date": date,
-  };
+  Map<String, dynamic> toJson() =>
+      {
+        "status": status,
+        "referenceId": referenceId,
+        "date": date,
+      };
 }
