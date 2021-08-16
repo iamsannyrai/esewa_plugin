@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
                 merchantInfo: _merchantInfo,
               );
 
-              await _esewa.makePayment(
+              _esewa.makePayment(
                 onSuccess: (successResponse) {
                   print("success: $successResponse");
                 },

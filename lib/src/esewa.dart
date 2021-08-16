@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'esewa_enum.dart';
 import 'merchant_info.dart';
@@ -41,10 +40,10 @@ class Esewa {
         _merchantInfo = merchantInfo,
         _environment = environment;
 
-  Future<void> makePayment(
+  void makePayment(
       {@required Function(PaymentResponse) onSuccess,
       @required Function(String) onError,
-      @required Function(String) onCancelled}) async {
+      @required Function(String) onCancelled}) {
     try {
       Map<String, String> merchantInfo = {
         "clientId": _merchantInfo.clientId,
@@ -64,8 +63,8 @@ class Esewa {
       _channel.setMethodCallHandler((call) async {
         switch (call.method) {
           case "onSuccess":
-            PaymentResponse paymentResponse =
-                paymentResponseFromJson(call.arguments);
+            PaymentResponse paymentResponse = PaymentResponse.fromJson(
+                Map<String, dynamic>.from(call.arguments));
             onSuccess(paymentResponse);
             break;
           case "onError":
@@ -76,7 +75,7 @@ class Esewa {
             break;
         }
       });
-    } on PlatformException catch (e) {
+    } catch (e) {
       throw e;
     }
   }
