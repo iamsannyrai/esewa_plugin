@@ -18,9 +18,9 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _merchantInfo = MerchantInfo(
-      clientId: "JB0BBQ4aD0UqIThFJwAKBgAXEUkEGQUBBAwdOgABHD4DChwUAB0R",
-      clientSecret: "BhwIWQQADhIYSxILExMcAgFXFhcOBwAKBgAXEQ==",
-      callbackUrl: "",
+      clientId: "your id",
+      clientSecret: "your secret",
+      callbackUrl: "url if any",
     );
   }
 
