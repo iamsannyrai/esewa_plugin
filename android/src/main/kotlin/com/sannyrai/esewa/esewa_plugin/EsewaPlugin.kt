@@ -18,7 +18,7 @@ import io.flutter.plugin.common.PluginRegistry
 
 /** EsewaPlugin */
 class EsewaPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
-    PluginRegistry.ActivityResultListener {
+        PluginRegistry.ActivityResultListener {
     private val requestPaymentCode: Int = 205
 
     private lateinit var activity: Activity
@@ -79,7 +79,7 @@ class EsewaPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
                 }
 
                 val eSewaPayment =
-                    ESewaPayment(amount, productName, referenceId, callbackUrl)
+                        ESewaPayment(amount, productName, referenceId, callbackUrl)
                 val intent = Intent(activity, ESewaPaymentActivity::class.java)
                 intent.putExtra(ESewaConfiguration.ESEWA_CONFIGURATION, eSewaConfiguration)
 
@@ -102,8 +102,15 @@ class EsewaPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     println("resultCode: $resultCode, RESULT OK")
-                    val successMessage = data?.getStringExtra(ESewaPayment.EXTRA_RESULT_MESSAGE)
-                    channel.invokeMethod("onSuccess", successMessage)
+                    try {
+                        println("data is $data")
+                        println("extra result message is ${ESewaPayment.EXTRA_RESULT_MESSAGE}")
+                        val successMessage = data?.getStringExtra(ESewaPayment.EXTRA_RESULT_MESSAGE)
+                        println("successMessage is ${successMessage}")
+                        channel.invokeMethod("onSuccess", successMessage)
+                    } catch (e: Error) {
+                        println("errorrr is $e")
+                    }
                 }
                 Activity.RESULT_CANCELED -> {
                     println("resultCode: $resultCode, RESULT CANCELLED")
