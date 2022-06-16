@@ -97,16 +97,20 @@ class EsewaPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
+        println("requestCode: $requestCode")
         if (requestCode == requestPaymentCode) {
             when (resultCode) {
                 Activity.RESULT_OK -> {
+                    println("resultCode: $resultCode, RESULT OK")
                     val successMessage = data?.getStringExtra(ESewaPayment.EXTRA_RESULT_MESSAGE)
                     channel.invokeMethod("onSuccess", successMessage)
                 }
                 Activity.RESULT_CANCELED -> {
+                    println("resultCode: $resultCode, RESULT CANCELLED")
                     channel.invokeMethod("onCancel", "Process cancelled by user.")
                 }
                 ESewaPayment.RESULT_EXTRAS_INVALID -> {
+                    println("resultCode: $resultCode, RESULT ERROR")
                     val errorMessage = data?.getStringExtra(ESewaPayment.EXTRA_RESULT_MESSAGE)
                     channel.invokeMethod("onError", errorMessage)
                 }
