@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
           child: ElevatedButton(
             onPressed: () async {
               _esewa = Esewa(
-                price: '200.0',
+                price: '10.0',
                 productName: 'Monitor',
                 referenceId: '1625497530',
                 merchantInfo: _merchantInfo,

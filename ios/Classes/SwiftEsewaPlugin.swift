@@ -61,6 +61,10 @@ public class SwiftEsewaPlugin: NSObject, FlutterPlugin, EsewaSDKPaymentDelegate 
     public func onEsewaSDKPaymentError(errorDescription: String) {
       // Called when there is error with the description of the error.
 //       self.result(errorDescription)
-        channel.invokeMethod("onError", arguments: errorDescription)
+         if (errorDescription=="Payment process is cancelled by user.") {
+            channel.invokeMethod("onCancel", arguments: errorDescription)
+         }else {
+            channel.invokeMethod("onError", arguments: errorDescription)
+         }
   }
 }

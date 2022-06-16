@@ -6,6 +6,7 @@ import androidx.annotation.NonNull
 import com.esewa.android.sdk.payment.ESewaConfiguration
 import com.esewa.android.sdk.payment.ESewaPayment
 import com.esewa.android.sdk.payment.ESewaPaymentActivity
+import com.google.gson.Gson
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -101,7 +102,9 @@ class EsewaPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val successMessage = data?.getStringExtra(ESewaPayment.EXTRA_RESULT_MESSAGE)
-                    channel.invokeMethod("onSuccess", successMessage)
+                    val gson = Gson()
+                    val map = gson.fromJson(successMessage,MutableMap::class.java)
+                    channel.invokeMethod("onSuccess", map)
                 }
                 Activity.RESULT_CANCELED -> {
                     channel.invokeMethod("onCancel", "Process cancelled by user.")
