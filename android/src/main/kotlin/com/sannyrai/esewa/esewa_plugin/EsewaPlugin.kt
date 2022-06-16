@@ -19,7 +19,7 @@ import io.flutter.plugin.common.PluginRegistry
 
 /** EsewaPlugin */
 class EsewaPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
-    PluginRegistry.ActivityResultListener {
+        PluginRegistry.ActivityResultListener {
     private val requestPaymentCode: Int = 205
 
     private lateinit var activity: Activity
@@ -80,7 +80,7 @@ class EsewaPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
                 }
 
                 val eSewaPayment =
-                    ESewaPayment(amount, productName, referenceId, callbackUrl)
+                        ESewaPayment(amount, productName, referenceId, callbackUrl)
                 val intent = Intent(activity, ESewaPaymentActivity::class.java)
                 intent.putExtra(ESewaConfiguration.ESEWA_CONFIGURATION, eSewaConfiguration)
 
@@ -98,12 +98,14 @@ class EsewaPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
+        println("requestCode: $requestCode")
         if (requestCode == requestPaymentCode) {
+            println("resultCode: $resultCode")
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val successMessage = data?.getStringExtra(ESewaPayment.EXTRA_RESULT_MESSAGE)
                     val gson = Gson()
-                    val map = gson.fromJson(successMessage,MutableMap::class.java)
+                    val map = gson.fromJson(successMessage, MutableMap::class.java)
                     channel.invokeMethod("onSuccess", map)
                 }
                 Activity.RESULT_CANCELED -> {
@@ -114,6 +116,8 @@ class EsewaPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
                     channel.invokeMethod("onError", errorMessage)
                 }
             }
+        } else {
+            println("called outside")
         }
         return true
     }
